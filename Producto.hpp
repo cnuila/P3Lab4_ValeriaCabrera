@@ -16,7 +16,7 @@ class Producto {
   
   public:
   Producto();  
-  Producto(int,string,string,int,float);
+  Producto(int,string,string,int,int);
   ~Producto();
   int getID();
   string getNombre();

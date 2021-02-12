@@ -4,12 +4,12 @@ Producto::Producto(){
   // cout<<"llamaron al vacio" << endl;
 }
 
-Producto::Producto(int i,string nom,string categ, int c, float p){
-  this->id = i;
-  this->nombre = nom;
-  this->categoria = categ;
-  this->cant = c;
-  this->precio = p;
+Producto::Producto(int id,string nombre,string categoria, int cant, int precio){
+  this->id = id;
+  this->nombre = nombre;
+  this->categoria = categoria;
+  this->cant = cant;
+  this->precio = precio;
 }
 
 Producto::~Producto(){
@@ -20,39 +20,39 @@ int Producto::getID(){
   return this->id;
 }
 
-void Producto::setID(int i){
-  this->id = i;
+void Producto::setID(int id){
+  this->id = id;
 }
 
 string Producto::getNombre(){
   return this->nombre;
 }
 
-void Producto::setNombre(string nom){
-  this->nombre = nom;
+void Producto::setNombre(string nombre){
+  this->nombre = nombre;
 }
 
 string Producto::getCategoria(){
   return this->categoria;
 }
 
-void Producto::setCategoria(string categ){
-  this->categoria = categ;
+void Producto::setCategoria(string categoria){
+  this->categoria = categoria;
 }
 
 int Producto::getCantidad(){
   return this->cant;
 }
 
-void Producto::setCantidad(int c){
-  this->cant = c;
+void Producto::setCantidad(int cant){
+  this->cant = cant;
 }
 
 float Producto::getPrecio(){
   return this->precio;
 }
 
-void Producto::setPrecio(float p){
-  this->precio =p;
+void Producto::setPrecio(float precio){
+  this->precio =precio;
 }
 
