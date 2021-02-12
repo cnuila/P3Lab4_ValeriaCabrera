@@ -3,6 +3,7 @@
 #include "Inventario.hpp"
 
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
+using namespace std;
 
 int main(int argc, char** argv) {
 	
@@ -49,7 +50,7 @@ int main(int argc, char** argv) {
 						
 						Producto* producto = new Producto(id,nombre,catg,cant,precio);
 						
-						cout<<"Producto agregado: "<<nombre<<endl;
+						//cout<<"Producto agregado: "<<nombre<<endl;
 						
 						//agregar a los vectores del inventario
 						inventario->agregarProducto(producto);
@@ -142,7 +143,7 @@ int main(int argc, char** argv) {
 			}//fin del case 3
 			
 			case 4:{
-				cout<<"Adios, tenga buen día";
+				cout<<"Adios, tenga buen dia";
 				break;
 			}//fin del case de salida
 			
@@ -153,6 +154,9 @@ int main(int argc, char** argv) {
 			
 		}//fin del switch del menu principal
 	}//fin del while del menu
+	
+	//delete inventario;
+	//delete producto;
 	
 	return 0;
 }

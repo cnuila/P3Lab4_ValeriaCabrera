@@ -1,10 +1,12 @@
+#include <string>
 #include "Inventario.hpp"
+#include "Producto.hpp"
 
 Inventario::Inventario(){
   // cout<<"llamaron al vacio" << endl;
 }
 
-Inventario::Inventario(vector<Producto> listaP, vector<string> listaCatg){
+Inventario::Inventario(vector<Producto*> listaP, vector<string> listaCatg){
   this-> listaP = listaP;
   this-> listaCatg = listaCatg;
 }
@@ -18,6 +20,8 @@ void Inventario::agregarProducto(Producto* prod){
 	cout<<"Se ha agregado "<<prod->getNombre()<<" al inventario"<<endl;
 }
 
+
+//arreglar
 void Inventario::agregarCategoria(Producto* prod){
 	//boolean para marcar si ya existe esa categoría
 	bool add = true;
@@ -52,4 +56,12 @@ void Inventario::listarProductos(){
 		Producto* pr = new Producto();
 		cout<<i<<") "<<pr->getID()<<" "<<pr->getNombre()<<" "<<pr->getCategoria()<<" "<<pr->getCantidad()<<" "<<pr->getPrecio()<<endl;
 	}
+}
+
+vector<Producto*> Inventario::getListaProducto(){
+	return this->listaP;
+}
+
+vector<string> Inventario::getListaCategoria(){
+	return this->listaCatg;
 }
