@@ -54,7 +54,7 @@ int main(int argc, char** argv) {
 						
 						//agregar a los vectores del inventario
 						inventario->agregarProducto(producto);
-						inventario->agregarCategoria(producto);
+						inventario->agregarCategoria(catg);
 						
 						break;
 					}//fin del case 1
@@ -134,16 +134,41 @@ int main(int argc, char** argv) {
 			
 			case 2:{
 				
+				//estadisticas generales
+				
+				cout<<"ESTADISTICAS GENERALES "<<endl;
+				cout<<endl<<"PRODUCTOS DEL INVENTARIO: "<<endl;
+				inventario->listarProductos();
+				cout<<"TOTAL DE PRODUCTOS UNICOS: "<<inventario->unicos()<<endl;
+				cout<<"PRECIO TOTAL DEL INVENTARIO: "<<inventario->precioInventario()<<endl;
+				cout<<"TOTAL DE PRODUCTOS POR CATEGORIA: "<<endl;
+				inventario->prodPorCatg();
+				cout<<"PRECIO TOTAL POR CATEGORIA: "<<endl;
+				inventario->precioCatg();
+				
+				
 				break;
 			}//fin del case 2
 			
 			case 3:{
+				
+				string cadena;
+				cout<<"Ingrese la palabra que desea buscar en el inventario: ";
+				cin>>cadena;
+				//crear y llenar el vector con la busqueda
+				vector<Producto*> busqueda;
+				
+				
+				
+				Inventario i = new Inventario(busqueda);
+				
 				
 				break;
 			}//fin del case 3
 			
 			case 4:{
 				cout<<"Adios, tenga buen dia";
+				delete inventario;
 				break;
 			}//fin del case de salida
 			
@@ -154,9 +179,7 @@ int main(int argc, char** argv) {
 			
 		}//fin del switch del menu principal
 	}//fin del while del menu
-	
-	//delete inventario;
-	//delete producto;
+
 	
 	return 0;
 }

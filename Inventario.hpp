@@ -13,17 +13,22 @@ class Inventario {
   vector<string> listaCatg;
   
   public:
-  Inventario();  
+  Inventario();
+  Inventario(vector<Producto*>);
   Inventario(vector<Producto*>,vector<string>);
   ~Inventario();
   void agregarProducto(Producto*);
-  void agregarCategoria(Producto*);
+  void agregarCategoria(string);
   void eliminarCategoria(int);
   void listarProductos();
   vector<Producto*> getListaProducto();
   vector<string> getListaCategoria();
   void eliminarProducto(int);
-  Producto* buscarProductos(string);
+  void buscarProductos(string);
+  int unicos();
+  int precioInventario();
+  void prodPorCatg();
+  void precioCatg();
 
 };
 
