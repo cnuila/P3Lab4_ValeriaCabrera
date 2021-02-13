@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 #include "Producto.hpp"
 #include "Inventario.hpp"
 
@@ -24,110 +25,113 @@ int main(int argc, char** argv) {
 			
 			case 1:{
 				
+				
+				while(opcion2!=4){
+				
 				//menu secundario
-				cout<<"1. Agregar Producto\n"<<"2. Modificar Producto\n"<<"3. Eliminar Producto\n";
+				cout<<"1. Agregar Producto\n"<<"2. Modificar Producto\n"<<"3. Eliminar Producto\n"<<"4. Salir"<<endl;
 				cout<<"Ingrese la opcion a realizar: ";
 				cin>>opcion2;
 				
-				switch(opcion2){
+					switch(opcion2){
 					
-					case 1:{
+						case 1:{
 						
-						//agregación
-						int id,cant,precio;
-						string nombre, catg;
+							//agregación
+							int id,cant,precio;
+							string nombre, catg;
 						
-						cout<<"Ingrese el ID: ";
-						cin>>id;
-						cout<<"Ingrese el nombre del producto: ";
-						cin>>nombre;
-						cout<<"Ingrese la categoría: ";
-						cin>>catg;
-						cout<<"Ingrese la cantidad de unidades: ";
-						cin>>cant;
-						cout<<"Ingrese el precio: ";
-						cin>>precio;
+							cout<<"Ingrese el ID: ";
+							cin>>id;
+							cout<<"Ingrese el nombre del producto: ";
+							cin>>nombre;
+							cout<<"Ingrese la cantidad de unidades: ";
+							cin>>cant;
+							cout<<"Ingrese la categoría: ";
+							cin>>catg;
+							cout<<"Ingrese el precio: ";
+							cin>>precio;
 						
-						Producto* producto = new Producto(id,nombre,catg,cant,precio);
+							Producto* producto = new Producto(id,nombre,catg,cant,precio);
 						
-						//cout<<"Producto agregado: "<<nombre<<endl;
+							//agregar a los vectores del inventario
+							inventario->agregarProducto(producto);
+							inventario->agregarCategoria(catg);
 						
-						//agregar a los vectores del inventario
-						inventario->agregarProducto(producto);
-						inventario->agregarCategoria(catg);
-						
-						break;
-					}//fin del case 1
+							break;
+						}//fin del case 1
 					
-					case 2:{
+						case 2:{
 						
-						//modificar
-						int index;
+							//modificar
+							int index;
 
-						cout<<"Ingrese el numero del indice que desea modificar: ";
-						cin>>index;
-
-						while( inventario->getListaProducto().size() < index || index<0) {
-
-							cout<<"No existe un producto con ese indice";
 							cout<<"Ingrese el numero del indice que desea modificar: ";
 							cin>>index;
-						}//fin de la validacion
+
+							while( inventario->getListaProducto().size() < index || index<0) {
+
+								cout<<"No existe un producto con ese indice";
+								cout<<"Ingrese el numero del indice que desea modificar: ";
+								cin>>index;
+							}//fin de la validacion
 						
-						string nombre,catg;
-						int id,cant,precio;
+							string nombre,catg;
+							int id,cant,precio;
 						
-						cout<<"Ingrese el nuevo ID: ";
-						cin>>id;
-						cout<<"Ingrese el nuevo nombre del producto: ";
-						cin>>nombre;
-						cout<<"Ingrese la nueva categoría: ";
-						cin>>catg;
-						cout<<"Ingrese la nueva cantidad de unidades: ";
-						cin>>cant;
-						cout<<"Ingrese el nuevo precio: ";
-						cin>>precio;
+							cout<<"Ingrese el nuevo ID: ";
+							cin>>id;
+							cout<<"Ingrese el nuevo nombre del producto: ";
+							cin>>nombre;
+							cout<<"Ingrese la nueva cantidad de unidades: ";
+							cin>>cant;
+							cout<<"Ingrese la nueva categoría: ";
+							cin>>catg;
+							cout<<"Ingrese el nuevo precio: ";
+							cin>>precio;
 						
-						//crear un nuevo objeto temporal
-						Producto* p = new Producto();
-						p = inventario->getListaProducto().at(index);
+							//crear un nuevo objeto temporal
+							Producto* p = new Producto();
+							p = inventario->getListaProducto().at(index);
 						
-						p->setID(id);
-						p->setNombre(nombre);
-						p->setCategoria(catg);
-						p->setCantidad(cant);
-						p->setPrecio(precio);
+							p->setID(id);
+							p->setNombre(nombre);
+							p->setCategoria(catg);
+							p->setCantidad(cant);
+							p->setPrecio(precio);
 						
-						break;
-					}//fin del case 2
+							break;
+						}//fin del case 2
 					
-					case 3:{
+						case 3:{
 						
-						//eliminar
+							//eliminar
 						
-						int index;
+							int index;
 
-						cout<<"Ingrese el numero del indice que desea eliminar: ";
-						cin>>index;
-
-						while( inventario->getListaProducto().size() < index || index<0) {
-
-							cout<<"No existe un producto con ese indice";
 							cout<<"Ingrese el numero del indice que desea eliminar: ";
 							cin>>index;
-						}//fin de la validacion
+
+							while( inventario->getListaProducto().size() < index || index<0) {
+
+								cout<<"No existe un producto con ese indice";
+								cout<<"Ingrese el numero del indice que desea eliminar: ";
+								cin>>index;
+							}//fin de la validacion
 						
-						inventario->eliminarProducto(index);
+							inventario->eliminarProducto(index);
 						
-						break;
-					}//fin del case 3
+							break;
+						}//fin del case 3
 					
-					default:{
-						cout<<"No ha ingresado una opcion del menu"<<endl;
-						break;
-					}//fin del case de validación
+						default:{
+							cout<<"No ha ingresado una opcion del menu"<<endl;
+							break;
+						}//fin del case de validación
 					
-				}//fin del switch del menu secundario
+					}//fin del switch del menu secundario
+				
+				}//fin del segundo while
 				
 				break;
 			}//fin del case 1
@@ -157,10 +161,31 @@ int main(int argc, char** argv) {
 				cin>>cadena;
 				//crear y llenar el vector con la busqueda
 				vector<Producto*> busqueda;
+				vector<string> catgBusqueda;
 				
+				for(int i = 0; i < inventario->getListaProducto().size(); i++){
+					Producto* p = new Producto();
+					p = inventario->getListaProducto().at(i);
+					string aux = p->getNombre();
+					if(aux.find(cadena) != string::npos){
+						busqueda.push_back(p);
+						string a = p->getCategoria();
+						catgBusqueda.push_back(a);
+					}
+				}
 				
+				Inventario* i = new Inventario(busqueda,catgBusqueda);
 				
-				Inventario i = new Inventario(busqueda);
+				cout<<"ESTADISTICAS GENERALES "<<endl;
+				cout<<endl<<"PRODUCTOS DEL INVENTARIO: "<<endl;
+				i->listarProductos();
+				cout<<"TOTAL DE PRODUCTOS UNICOS: "<<i->unicos()<<endl;
+				cout<<"PRECIO TOTAL DEL INVENTARIO: "<<i->precioInventario()<<endl;
+				cout<<"TOTAL DE PRODUCTOS POR CATEGORIA: "<<endl;
+				i->prodPorCatg();
+				cout<<"PRECIO TOTAL POR CATEGORIA: "<<endl;
+				i->precioCatg();
+				
 				
 				
 				break;

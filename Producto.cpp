@@ -13,7 +13,7 @@ Producto::Producto(int id,string nombre,string categoria, int cant, int precio){
 }
 
 Producto::~Producto(){
-  cout << "Se eliminó el producto" << endl;
+  //cout << "Se eliminó el producto" << endl;
 }
 
 int Producto::getID(){
